@@ -1,0 +1,22 @@
+Name: bookstore.rpc
+ListenOn: 0.0.0.0:30181
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: bookstore.rpc
+
+# jwt auth
+JWTAuth:
+  AccessSecret: ae8b4adf-8c5c-418f-9d23-68c4d574ee43
+  AccessExpired: 31536000
+
+DB:
+  DataSource: root:Gxy1234$@tcp(localhost:3306)/bookstore?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  # mysql 链接地址，满足 $user:$password@tcp($ip:$port)/$db?$queries 格式即可
+  Table: books
+Cache:
+  - Host: localhost:6379
+
+DefaultPageParam:
+  Page: 1
+  PageSize: 10

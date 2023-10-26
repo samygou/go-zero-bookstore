@@ -1,0 +1,74 @@
+syntax = "v1"
+
+info(
+    title: "bookstore service"
+    desc: "bookstore service"
+    author: "samy"
+    email: "samygou008@gmail.com"
+    version: "v1"
+)
+
+type(
+    CreateBookReq {
+        Name  string `json:"name"`
+        Price int64  `json:"price"`
+        Desc  string `json:"desc"`
+    }
+
+    CreateBookResp {
+        ID int64 `json:"id"`
+    }
+)
+
+type (
+    UpdateBookReq {
+        ID    int64  `path:"id"`
+        Name  string `json:"name"`
+        Price int64  `json:"price"`
+        Desc  string `json:"desc"`
+    }
+
+    UpdateBookResp {
+        ID int64 `json:"id"`
+    }
+)
+
+type (
+    Book {
+        ID    int64  `json:"id"`
+        Name  string `json:"name"`
+        Price int64  `json:"price"`
+    }
+
+    GetBookReq {
+        ID int64 `path:"id"`
+    }
+
+    GetBookResp {
+        ID    int64  `json:"id"`
+        Name  string `json:"name"`
+        Price int64  `json:"price"`
+    }
+
+    GetBookListReq {
+        Name     *string `form:"name,optional"`
+        Price    *int64  `form:"price,optional"`
+        Page     *int64  `form:"page,optional"`
+        PageSize *int64  `form:"page_size,optional"`
+        OrderBy  *string `form:"order_by,optional"`
+    }
+
+    GetBookListResp {
+        Books []Book `json:"books"`
+    }
+)
+
+type (
+    DeleteBookReq {
+        ID int64 `path:"id"`
+    }
+
+    DeleteBookResp {
+        ID int64 `json:"id"`
+    }
+)

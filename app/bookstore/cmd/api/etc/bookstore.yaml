@@ -1,0 +1,14 @@
+Name: bookstore
+Host: 0.0.0.0
+Port: 30013
+
+#jwt auth
+JWTAuth:
+  AccessSecret: ae8b4adf-8c5c-418f-9d23-68c4d574ee43
+  AccessExpired: 31536000
+
+Bookstore:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: bookstore.rpc

@@ -1,0 +1,58 @@
+syntax = "v1"
+
+info (
+	title: "用户实例"
+	desc: "用户实例"
+	author: "samy"
+	email: "samygou008@gmail.com"
+)
+
+type User {
+	Id 		 int64  `json:"id"`
+	Mobile 	 string `json:"mobile"`
+	Username string `json:"username"`
+	Sex 	 int64 	`json:"sex"`
+	Avator   string `json:"avatar"`
+	Remark 	 string `json:"remark"`
+}
+
+type (
+	RegisterReq {
+		Mobile    string `form:"mobile"`
+		Username  string `form:"username"`
+		Password  string `form:"password"`
+		Password2 string `form:"password2"`
+	}
+
+	RegisterResp {
+		Token string `json:"token"`
+	}
+)
+
+type (
+	LoginReq {
+		Mobile   string `form:"mobile"`
+		Password string `form:"password"`
+	}
+
+	LoginResp {
+		Token string `json:"token"`
+	}
+)
+
+type (
+	UserInfoResp {
+		UserInfo User `json:"user_info"`
+	}
+)
+
+type (
+	UpdateUserReq {
+		Id 		 int64  `form:"id"`
+		Mobile   string `form:"mobile"`
+		Username string `form:"username"`
+		Sex 	 int64  `form:"sex"`
+		Avatar   string `form:"avatar"`
+		Remark   string `form:"remark"`
+	}
+)

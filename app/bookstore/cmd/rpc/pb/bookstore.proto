@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message Book {
+  int64 id = 1;
+  string name = 2;
+  int64 price = 3;
+  string desc = 4;
+}
+
+message CreateBookReq {
+  string name = 1;
+  int64 price = 2;
+  string desc = 3;
+}
+
+message CreateBookResp {
+  int64 id = 1;
+}
+
+message UpdateBookReq {
+  int64 id = 1;
+  string name = 2;
+  int64 price = 3;
+  string desc = 4;
+}
+
+message UpdateBookResp {
+  int64 id = 1;
+}
+
+message DeleteBookReq {
+  int64 id = 1;
+}
+
+message DeleteBookResp {
+  int64 id = 1;
+}
+
+message GetBookReq  {
+  int64 id = 1;
+}
+
+message GetBookResp {
+  Book book = 1;
+}
+
+message GetBookListReq {
+  optional string name = 1;
+  optional int64  price = 2;
+  optional string order_by = 3;
+  optional int64  page = 4;
+  optional int64  page_size = 5;
+}
+
+message GetBookListResp {
+  repeated Book books = 1;
+}
+
+service bookstore {
+  // 添加book
+  rpc CreateBook (CreateBookReq) returns (CreateBookResp) {}
+
+  // 更新book
+  rpc UpdateBook (UpdateBookReq) returns (UpdateBookResp) {}
+
+  // 删除book
+  rpc DeleteBook (DeleteBookReq) returns (DeleteBookResp) {}
+
+  // 获取book
+  rpc GetBook (GetBookReq) returns (GetBookResp) {}
+
+  // 获取book list
+  rpc GetBookList (GetBookListReq) returns (GetBookListResp) {}
+}

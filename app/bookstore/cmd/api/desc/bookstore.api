@@ -1,0 +1,40 @@
+syntax = "v1"
+
+info(
+	title: "bookstore service"
+	desc: "bookstore service"
+	author: "samy"
+	email: "samygou008@gmail.com"
+	version: "v1"
+)
+
+import (
+	"bookstore/bookstore.api"
+)
+
+@server(
+	prefix: bookstore/v1
+	group: bookstoreCenter
+	jwt: JWTAuth
+)
+service bookstore {
+	@doc "添加book"
+	@handler CreateBook
+	post /bookstore-center/book (CreateBookReq) returns (CreateBookResp)
+
+	@doc "更新book"
+	@handler UpdateBook
+	put /bookstore-center/:id/book (UpdateBookReq) returns (UpdateBookResp)
+
+	@doc "删除book"
+	@handler DeleteBook
+	delete /bookstore-center/:id/book (DeleteBookReq) returns (DeleteBookResp)
+
+	@doc "获取book"
+	@handler GetBook
+	get /bookstore-center/:id/book (GetBookReq) returns (GetBookResp)
+
+	@doc "获取book list"
+	@handler GetBookList
+	get /bookstore-center/book-list (GetBookListReq) returns (GetBookListResp)
+}

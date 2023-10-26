@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package usercenter;
+option go_package="./usercenter";
+
+enum Error {
+  OK = 0;
+  USER_NOT_FOUND = 1;
+  USER_ALREADY_EXIST = 2;
+  MOBILE_ALREADY_EXIST = 3;
+  SERVER_FAULT = 20;
+}
+
+message User {
+  int64 id = 1;
+  string mobile = 2;
+  string username = 3;
+  int64 sex = 4;
+  string avatar = 5;
+  string remark = 6;
+}
+
+message UserAuth {
+  int64 id = 1;
+  int64 userId = 2;
+}
+
+message RegisterReq {
+  string mobile = 1;
+  string username = 2;
+  string password = 3;
+  string password2 = 4;
+}
+
+message RegisterResp {
+  Error err = 1;
+  string token = 2;
+}
+
+message LoginReq {
+  string mobile = 1;
+  string password = 2;
+}
+
+message LoginResp {
+  Error err = 1;
+  string token = 2;
+}
+
+message GetUserInfoReq {
+  int64 id = 1;
+}
+
+message GetUserInfoResp {
+  Error err = 1;
+  User user = 2;
+}
+
+message GetUserByMobileReq {
+  string mobile = 1;
+}
+
+message GetUserByMobileResp {
+  Error err = 1;
+  User user = 2;
+}
+
+message ExistUserByMobileReq {
+  string mobile = 1;
+}
+
+message ExistUserByMobileResp {
+  Error err = 1;
+  bool exist = 2;
+}
+
+message ExistUserByUserIdReq {
+  int64 userId = 1;
+}
+
+message ExistUserByUserIdResp {
+  Error err = 1;
+  User user = 2;
+}
+
+message GenerateTokenReq {
+  int64 userId = 1;
+}
+
+message GenerateTokenResp {
+  Error err = 1;
+  string token = 2;
+}
+
+message UpdateUserReq {
+  int64  id = 1;
+  string mobile = 2;
+  string username = 3;
+  int64  sex = 4;
+  string avatar = 5;
+  string remark = 6;
+}
+
+message UpdateUserResp {
+  Error err = 1;
+}
+
+service Usercenter {
+  rpc Register(RegisterReq) returns(RegisterResp) {}
+  rpc Login(LoginReq) returns(LoginResp) {}
+  rpc GetUserInfo(GetUserInfoReq) returns(GetUserInfoResp) {}
+  rpc GetUserByMobile(GetUserByMobileReq) returns(GetUserByMobileResp) {}
+  rpc UpdateUser(UpdateUserReq) returns(UpdateUserResp) {}
+  rpc ExistUserByUserId(ExistUserByUserIdReq) returns(ExistUserByUserIdResp) {}
+  rpc ExistUserByMobile(ExistUserByMobileReq) returns(ExistUserByMobileResp) {}
+  rpc GenerateToken(GenerateTokenReq) returns(GenerateTokenResp) {}
+}
